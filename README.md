@@ -1,75 +1,27 @@
-# Nuxt Minimal Starter
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-## Setup
-
-Make sure to install dependencies:
+## Production in Nuxt with docker and swarm:
 
 ```bash
-# npm
-npm install
 
-# pnpm
-pnpm install
+# start swarm
+docker swarm init
 
-# yarn
-yarn install
+# build image in docker
+docker build -t web_app:latest .
 
-# bun
-bun install
-```
+#Deploy the stack:
+docker stack deploy -c docker-compose.yml nuxt_stack
 
-## Development Server
+#Updated changes 
+docker build -t web_app:latest .
 
-Start the development server on `http://localhost:3000`:
+#Force the service to update with the new image:
+docker service update --force nuxt_stack_web_app
 
-```bash
-# npm
-npm run dev
+#(Optional) If you changed the docker-compose.yml, update the entire stack
+docker stack deploy -c docker-compose.yml nuxt_stack
 
-# pnpm
-pnpm dev
 
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+#Check the services:
+docker service ls
