@@ -25,3 +25,11 @@ docker stack deploy -c docker-compose.yml nuxt_stack
 
 #Check the services:
 docker service ls
+
+
+#Check the service tasks:
+docker service ps nuxt_stack_web_app
+
+
+#Look at the logs to identify problems (if any):
+docker service logs nuxt_stack_web_app
